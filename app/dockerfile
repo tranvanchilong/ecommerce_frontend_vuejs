@@ -1,0 +1,19 @@
+FROM node:lts as build-stage
+WORKDIR /app
+COPY . .
+# COPY app/package.json .
+# COPY app/src .
+RUN npm install
+#RUN npm run serve
+# RUN rm -rf node_modules && \
+#   NODE_ENV=production npm install \
+#   --prefer-offline \
+#   --pure-lockfile \
+#   --non-interactive \
+#   --production=true
+# FROM node:lts as prod-stage
+# WORKDIR /nuxt-ai-chat
+# COPY --from=build-stage /nuxt-ai-chat/.output/  ./.output/
+#CMD [ "node", ".output/server/index.mjs" ]
+CMD ["npm", "run", "serve"]
+

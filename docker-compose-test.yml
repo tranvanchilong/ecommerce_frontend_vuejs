@@ -1,4 +1,5 @@
-# version: "3.8"
+#
+version: "3.8"
 
 # services:
 #   app:
@@ -11,13 +12,27 @@
 #     volumes:
 #       - ./app:/app
 
-version: '3'
-services:
-    app:
-        image: registry.gitlab.com/tranvanchilong/async_web_gia:v0.9
-        container_name: ecom_api_vue
+#version: '3'
+#services:
+#    app:
+#        image: registry.gitlab.com/tranvanchilong/async_web_gia:v0.7
+#        container_name: ecom_api_vue
         # command: npm run serve
-        ports: 
-            - "5006:8080"
-        volumes:
-            - ./app:/app
+#        ports: 
+#            - "5006:8080"
+#        volumes:
+#            - ./app:/app
+services:
+  app:
+      image: chomamia/nuxt3-app
+      container_name: nuxt1
+#      command: npm run serve &
+      deploy:
+        restart_policy:
+          condition: on-failure
+          delay: 5s
+          max_attempts: 3
+          window: 120s
+      ports:
+        - '8080:8081'
+      restart: always
